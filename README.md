@@ -1,5 +1,5 @@
 # Hospital Operation Schedule
-## About
+## Overview
 This program is designed to help hospital staff to managed the scheduling process of medical operations within a hospital. This program allows hospital staff to view, add, and edit the operation data.
 ## Feature
 In this program, the features are as follows:
