@@ -472,20 +472,23 @@ def edit_by_doc_id():
                 else:
                     print('Id dokter tidak ditemukan.\n')
                     return
+            doc_name_store = None
+            for k, v in doctor_data.items():
+                if k == edit_doc_id:
+                    doc_name_store = v['Nama Dokter']
             data_check = None
             for i in operation:
                 if i['Kode Operasi'] == op_code:
                     data_check = i
             if data_check:
                 op_date = data_check['Tanggal Operasi']
-                doc_name = data_check['Nama Dokter']
             doc_date_conflict = False
             while True:
                 for i in operation:
                     if [edit_doc_id, op_date] == [i['Id Dokter'], i['Tanggal Operasi']]:
                         doc_date_conflict = True
                 if doc_date_conflict:
-                    print(f'Dokter {doc_name} memiliki jadwal operasi lain pada tanggal {op_date}.')
+                    print(f'Dokter {doc_name_store} memiliki jadwal operasi lain pada tanggal {op_date}.')
                     return
                 else:
                     break
@@ -495,8 +498,6 @@ def edit_by_doc_id():
                     if i['Kode Operasi'] == op_code:
                         i['Id Dokter'] = edit_doc_id
                         i['Nama Dokter'] = doctor_data[edit_doc_id]['Nama Dokter']
-                # show_data = [i for i in operation if i['Kode Operasi'] == op_code]
-                # print(tabulate(show_data, headers='keys', tablefmt='mixed_outline', numalign='center'))
                 print('Data berhasil di-update.')
                 print(tabulate(pk_data, headers='keys', tablefmt='mixed_outline', numalign='center'))
                 break
@@ -544,8 +545,6 @@ def edit_by_doc_name():
                 if i['Kode Operasi'] == op_code:
                     i['Nama Dokter'] = edit_doc_name
                     i['Id Dokter'] = doc_id_store
-            # show_data = [i for i in operation if i['Kode Operasi'] == op_code]
-            # print(tabulate(show_data, headers='keys', tablefmt='mixed_outline', numalign='center'))
             print('Data berhasil di-update.')
             print(tabulate(pk_data, headers='keys', tablefmt='mixed_outline', numalign='center'))
             break
@@ -562,8 +561,6 @@ def edit_by_patient():
             for i in operation:
                 if i['Kode Operasi'] == op_code:
                     i['Nama Pasien'] = edit_pat_name
-            # show_data = [i for i in operation if i['Kode Operasi'] == op_code]
-            # print(tabulate(show_data, headers='keys', tablefmt='mixed_outline', numalign='center'))
             print('Data berhasil di-update.')
             print(tabulate(pk_data, headers='keys', tablefmt='mixed_outline', numalign='center'))
             break
@@ -603,8 +600,6 @@ def edit_by_room():
                 for i in operation:
                     if i['Kode Operasi'] == op_code:
                         i['Ruang Operasi'] = edit_room
-                # show_data = [i for i in operation if i['Kode Operasi'] == op_code]
-                # print(tabulate(show_data, headers='keys', tablefmt='mixed_outline', numalign='center'))
                 print('Data berhasil di-update.')
                 print(tabulate(pk_data, headers='keys', tablefmt='mixed_outline', numalign='center'))
                 break
@@ -653,8 +648,6 @@ def edit_by_date():
             for i in operation:
                 if i['Kode Operasi'] == op_code:
                     i['Tanggal Operasi'] = edit_op_date
-            # show_data = [i for i in operation if i['Kode Operasi'] == op_code]
-            # print(tabulate(show_data, headers='keys', tablefmt='mixed_outline', numalign='center'))
             print('Data berhasil di-update.')
             print(tabulate(pk_data, headers='keys', tablefmt='mixed_outline', numalign='center'))
             break
@@ -671,8 +664,6 @@ def edit_by_op_name():
             for i in operation:
                 if i['Kode Operasi'] == op_code:
                     i['Nama Operasi'] = edit_op_name
-            # show_data = [i for i in operation if i['Kode Operasi'] == op_code]
-            # print(tabulate(show_data, headers='keys', tablefmt='mixed_outline', numalign='center'))
             print('Data berhasil di-update.')
             print(tabulate(pk_data, headers='keys', tablefmt='mixed_outline', numalign='center'))
             break
